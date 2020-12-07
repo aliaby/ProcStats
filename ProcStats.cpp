@@ -2,7 +2,7 @@
 // Created by ali on 2020-12-06.
 //
 
-#include "ProcStats.h"
+#include "ray/core_worker/ProcStats/ProcStats.h"
 
 void ProcStats::read_data(bool utilization, bool memory, bool net) {
     if(utilization){
@@ -51,7 +51,7 @@ void ProcStats::read_time() {
     std::istringstream iss(line);
     std::vector<std::string> tokens{std::istream_iterator<std::string>{iss},
                           std::istream_iterator<std::string>{}};
-    if (std::stoi(tokens[0], &sz) != pid_)
+    if (std::stoul(tokens[0], &sz) != pid_)
         throw std::logic_error("reading wrong pid file!\n");
 
     curr_active_time = std::stoi(tokens[UTIME], &sz) +

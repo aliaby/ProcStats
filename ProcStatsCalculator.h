@@ -14,7 +14,7 @@ public:
             pid_(pid), utilization_(utilization), memory_(memory), net_(net){};
     void start();
     void finish();
-    void get_stats();
+    ProcessStatistics get_stats();
 
 private:
     unsigned pid_;

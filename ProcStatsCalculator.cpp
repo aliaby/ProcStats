@@ -8,12 +8,11 @@
 void ProcStatsCalculator::start() {
     measurements_.push_back(std::pair<ProcStats, ProcStats> (ProcStats(pid_, utilization_, memory_, net_, true),
                                                           ProcStats(pid_, utilization_, memory_, net_, false)));
-//    measurements_.back().first.print();
 }
 
 void ProcStatsCalculator::finish() {
     measurements_.back().second.read_data(utilization_, memory_, net_);
-    measurements_.back().first.print();
-    std::cout << std::endl;
-    measurements_.back().second.print();
+    ProcessStatistics stats = (measurements_.back().second - measurements_.back().first).get_stats();
+    std::cout << "\n active time  : " << stats.active_time << std::endl;
+    std::cout << "memory usage : " << stats.memory_size << std::endl;
 }

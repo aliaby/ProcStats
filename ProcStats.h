@@ -23,11 +23,15 @@
 #define SHARED_PAGES 2
 #define DATA_PLUS_STACK 5
 
+struct ProcessStatistics{
+    unsigned active_time;
+    unsigned memory_size;
+};
+
 class ProcStats {
 public:
     ProcStats(unsigned pid, bool utilization, bool memory, bool net, bool read): pid_(pid) {
         curr_active_time = curr_idle_time = curr_net_usage = 0;
-        std::cout<<pid_;
         if(read)
             read_data(utilization, memory, net);
     };
@@ -44,7 +48,16 @@ public:
         std::cout << "data and stack      :" << total_data_stack_size << std::endl;
 
     }
+    ProcStats operator-(const ProcStats p){
+        ProcStats ps(pid_, true, true, true, false);
+        ps.process_statistics.active_time = curr_active_time - p.curr_active_time;
+        ps.process_statistics.memory_size = total_program_size - p.total_program_size;
+        return ps;
+    }
 
+    ProcessStatistics get_stats(){
+        return process_statistics;
+    }
 private:
     unsigned pid_;
     unsigned curr_active_time;
@@ -56,6 +69,7 @@ private:
     unsigned curr_net_usage;
     unsigned start_time;
 
+    ProcessStatistics process_statistics;
     void read_time();
     void read_mem();
     void read_net();

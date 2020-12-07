@@ -8,16 +8,17 @@
 #include <unistd.h>
 #include <chrono>
 
+
 int tureWhile(){
-    int j = 0;
+    int j = 1;
     int* t = new int[10000000];
     while(j != 0) j++;
+    std::cout << j;
     return t[j];
 }
 
 int main()
 {
-    std::cout << sysconf(_SC_CLK_TCK) << std::endl;
     ProcStatsCalculator stat(getpid(), true, true, true);
     stat.start();
     auto start = std::chrono::high_resolution_clock::now();

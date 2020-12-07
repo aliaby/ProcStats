@@ -10,10 +10,9 @@
 
 int tureWhile(){
     int j = 0;
-    for(int i = 0; i < 1000000; i++){
-        j++;
-    }
-    //while(j != 0) j++;
+    int* t = new int[10000000];
+    while(j != 0) j++;
+    return t[j];
 }
 
 int main()

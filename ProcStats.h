@@ -27,6 +27,7 @@ class ProcStats {
 public:
     ProcStats(unsigned pid, bool utilization, bool memory, bool net, bool read): pid_(pid) {
         curr_active_time = curr_idle_time = curr_net_usage = 0;
+        std::cout<<pid_;
         if(read)
             read_data(utilization, memory, net);
     };
@@ -37,6 +38,11 @@ public:
         std::cout << "curr_mem_usage : "<< curr_net_usage << std::endl;
         std::cout << "curr_net_usage : "<< curr_net_usage << std::endl;
         std::cout << "start time : "<< start_time << std::endl;
+        std::cout << "total program size     : " << total_program_size << std::endl;
+        std::cout << "total shared page size : " << total_shared_pages << std::endl;
+        std::cout << "resident set size      :" << resident_set_size << std::endl;
+        std::cout << "data and stack      :" << total_data_stack_size << std::endl;
+
     }
 
 private:
